@@ -1,25 +1,19 @@
-import glob
-
-
-error_lines = {}
 
 def find(substr, infile, outfile):
+    lines = []
     with open(infile) as a, open(outfile, 'a') as b:
         for line in a:
             if substr in line:
+                lines.append(line)
                 b.write(line + '\n')
-                if line not in error_lines:
-                    error_lines[line] = 1
-                else:
-                    error_lines[line] += 1
-#files should be trc files of identity match samples
-for filename in glob.glob('*.trc'):
+    return lines
+
+def parse_text(filepath, substr):
     files = []
-    files.append(filename)
+    for filename in glob.glob('D:/Illumina/Excludes/*.trc'):
+        files.append(filename)
 
     for item in files:
-        find("error", item, 'test_output.txt')
+        find(substr, item, filepath+'/text_output.txt')
 
-print error_lines
-
-#"E:P1:08/75" string for manual recovery errors
+# parse_text('D:/Illumina/Excludes','Exclude')
