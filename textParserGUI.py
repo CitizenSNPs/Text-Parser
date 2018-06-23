@@ -1,15 +1,11 @@
 from Tkinter import *
-import glob
-# from text_parser import find
-# from text_parser import parse_text
+from text_parser import *
 
 #key down function
 def click():
     entered_text = textentry.get() #this will collect text from text entry box
     entered_text2 = textentry2.get()
     response = parse_text(entered_text, entered_text2)
-    output.delete(0.0, END)
-    output.insert(response, END)
 
 #main:
 window = Tk()
@@ -35,10 +31,10 @@ textentry2.grid(row=4, column=0, sticky="W")
 Button(window, text="SUBMIT", width=6, command=click).grid(row=6, column=0, sticky="W")
 #width is 6 because 6 letters in SUBMIT
 
-#text box
-output = Text(window, width=75, height=6, wrap=WORD, background="white")
-output.grid(row=8, column=0, columnspan=2, sticky="W")
 
 
 #run main loop
 window.mainloop()
+
+if __name__ == "__main__":
+    import glob
